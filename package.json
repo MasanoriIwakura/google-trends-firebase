@@ -5,9 +5,13 @@
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
-    "start": "next start --hostname 0.0.0.0"
+    "start": "next start --hostname 0.0.0.0",
+    "export": "next export"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "bootstrap-material-design": "4.1.1",
+    "cors": "^2.8.5",
     "firebase": "^8.2.0",
     "google-trends-api": "^4.9.0",
     "next": "10.0.3",
