@@ -22,6 +22,11 @@ export const Home = () => {
   };
 
   const search = async () => {
+    if (!keyword || !startDate || !endDate) {
+      alert("全ての項目を入力してください");
+      return;
+    }
+
     const params = {
       keyword: keyword,
       geo: "JP",
@@ -31,27 +36,26 @@ export const Home = () => {
     };
 
     const query_params = new URLSearchParams(params);
-    const ret = await fetch(`/api/gta?${query_params}`)
-    console.log(ret);
+    window.open(`/api/gta?${query_params}`, "_self");
   };
 
   return (
     <div className="container">
       <main>
-        <h1>Welcome to Google Trends Firebase App</h1>
+        <h1>Google Trends Downloader</h1>
 
         <div className="jumbotron mt-3">
           <div className="form-group">
             <label>Keyword</label>
-            <input
-              type="text"
+            <textarea
               className="form-control"
               placeholder="keyword"
               name="keyword"
               value={keyword}
               onChange={handleChange}
+              rows="10"
               required
-            ></input>
+            ></textarea>
           </div>
           <div className="form-group">
             <label>Start Date</label>
@@ -77,7 +81,11 @@ export const Home = () => {
               required
             ></input>
           </div>
-          <button type="button" className="btn btn-primary" onClick={search}>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={search}
+          >
             Search
           </button>
         </div>
