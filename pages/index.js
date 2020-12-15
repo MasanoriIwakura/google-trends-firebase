@@ -1,4 +1,3 @@
-import gta from "google-trends-api";
 import { useState } from "react";
 
 export const Home = () => {
@@ -27,11 +26,12 @@ export const Home = () => {
       keyword: keyword,
       geo: "JP",
       hl: "ja",
-      startTime: new Date(startDate),
-      endTime: new Date(endDate),
+      startTime: startDate,
+      endTime: endDate,
     };
 
-    const ret = await gta.interestOverTime(params);
+    const query_params = new URLSearchParams(params);
+    const ret = await fetch(`/api/gta?${query_params}`)
     console.log(ret);
   };
 
@@ -50,6 +50,7 @@ export const Home = () => {
               name="keyword"
               value={keyword}
               onChange={handleChange}
+              required
             ></input>
           </div>
           <div className="form-group">
@@ -61,6 +62,7 @@ export const Home = () => {
               name="start-date"
               value={startDate}
               onChange={handleChange}
+              required
             ></input>
           </div>
           <div className="form-group">
@@ -72,6 +74,7 @@ export const Home = () => {
               name="end-date"
               value={endDate}
               onChange={handleChange}
+              required
             ></input>
           </div>
           <button type="button" className="btn btn-primary" onClick={search}>
